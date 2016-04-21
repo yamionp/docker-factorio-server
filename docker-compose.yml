@@ -1,6 +1,6 @@
 factorio:
   # build: .
-  image: factorio
+  image: munisystem/factorio
   ports: 
     - "34197:34197"
   volumes:
