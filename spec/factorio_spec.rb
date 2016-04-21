@@ -7,7 +7,3 @@ end
 describe file('/factorio/start.sh') do
   it { should be_file }
 end
-
-describe port(34197) do
-  it { should be_listening }
-end
