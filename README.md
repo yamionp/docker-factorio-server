@@ -3,8 +3,9 @@
 
 Dockerfile to build a [Factorio Server](https://www.factorio.com/download-headless/stable) container image.
 
-### Current Version
-0.12.30
+### Version
+latest:0.12.30
+stable:0.12.29
 
 ### How to use
 
