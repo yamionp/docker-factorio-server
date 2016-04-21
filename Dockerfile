@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y wget tzdata && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 WORKDIR factorio
-COPY start.sh .
+COPY ./start.sh /factorio/start.sh
 
 EXPOSE 34197/udp
 

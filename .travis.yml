@@ -9,9 +9,8 @@ env:
   - TARGET_CONTAINER_ID=factorio
 
 before_script:
-  - docker build -t facrotio .
+  - docker build -t factorio .
   - docker run -d --name $TARGET_CONTAINER_ID factorio
-  - docker exec -it $TARGET_CONTAINER_ID docker -v
 
 script:
   - bundle exec rspec
