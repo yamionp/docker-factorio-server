@@ -4,4 +4,4 @@ factorio:
   ports: 
     - "34197:34197"
   volumes:
-    - /tmp/saves:/factorio/saves
+    - /srv/docker/saves:/factorio/saves
