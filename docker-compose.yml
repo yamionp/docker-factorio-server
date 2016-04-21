@@ -1,0 +1,7 @@
+factorio:
+  # build: .
+  image: factorio
+  ports: 
+    - "34197:34197"
+  volumes:
+    - /tmp/saves:/factorio/saves
