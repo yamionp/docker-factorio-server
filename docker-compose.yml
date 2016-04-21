@@ -2,6 +2,6 @@ factorio:
   # build: .
   image: munisystem/factorio
   ports: 
-    - "34197:34197"
+    - "34197:34197/udp"
   volumes:
-    - /tmp/saves:/factorio/saves
+    - /srv/docker/saves:/factorio/saves
