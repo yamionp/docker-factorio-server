@@ -1,16 +1,22 @@
 sudo: required
-
 language: ruby
-
 services:
   - docker
 
 env:
-  - TARGET_CONTAINER_ID=factorio
+  global:
+    - TARGET_CONTAINER_ID=factorio
+    - VERSION=0.12.30
+    - secure: JNKhMpLi7YMcHdOiU0PlflwJUmmmT/jElKzyEO52zDVgtfQhulK5Yah4nPCEbc+53fpGRCD4MzORCCW+dbAaMuSQnC+eq1fPjKFAK8DqLvUSSAw0B0hj0YiY+hAioF25CYQdZDogBJK9gweuhQy/0UQjkCTHojMHlytSw1lyubXTLP3U0C0cYfldapTGeORzEqWQl63QJXxXioSTBCps9PTqH0P3CYpSDbevmu4NY2JaLHZc97cLRI75s0HFGkwOVeRdMYWLUzYxh69mQ+l6uc1J8t+rDyDcGwgippGyBAoCXnt7wkt6OlA546YmXozHAj/yRYlmww63p+Fr3xlHlTKzR3zkE3VjCIuDUViXJwCZ82sLBBSgoSc1gjEgCVruZgvmykTAxQfs6JodaFIXMy7kXBSknBdKPNEAPgFGtL/M4ppsVz2hD1h4enyTYWwhgZ521xMlFoAk2orlTt4xY8IH0/GkBuEfwMnoBVnJ8eDkxLhBVs2nBJzGcd4b5xC+Ik+dLOP/o4zg56CrMxuObRZHA/meBa8Bm65XEE8+2I9wgZEQlWsb0M0uyynXqGaSHAX/jedxER7mH0W/3jjhJRBwg7jWz0toPDFvmiYyuNwsdBjuMAxsEt4ruujI5drJ8SL25slxKFxzKA1qcsvhUSdX2g6YdqWiJ+04vX4YagU=
+    - secure: f2xXDlj/UuHjaVd5uHTb4hREd0n6iPfW6H2tb4OYn/2GN9jfE61NIhHcDyKh6hxkRfaxe1/83QdhYHU8VP0Qi32TkyK6EUYy1Y3/AZn0c38Zmgx+OhvBPn7cksiHFlajj66ezf4G4OeyR/E74adsCH9BA6KQoqHL/EuZ+5dyMXc9yYxq+1MjBlbk7EUFmuc7tZzFeHLk64iWoAHkYS6jFPYLkb/1bIlBq5e9QKW0jtq8SUY/YaQqHw73KJvPnBIlgBoFsQoX8wa/FPSzCcEosWx4Rr+/27jv6H7nvlO0yOVGQly8ov4UG8rzHcpOpr53XTFGBKzUyXdhQR9HlaNW1fV/nXJKixqf3sx3E1nILlDlwb1qDgfuzY4zeCkcITT2OPAnDIuHOxKREq8+H3Pt3NUBZnLPetS4po+e4M+mH5qLdpsH4NE32FDBb08hC8xNQCWjDKV7Kl2aDfkmxwGbkOOpiuO4QKI7KpxG82J1B0xyb0R3/sQ5n6lJ+YZr4MvXMpY1pLSzkis+8QIPXgPW2uj+DU1SYxkr64iGwPkzs9pZFXCKeRIjcr7QqqQYGIUPC+/yw0ACJRUmBC/8VIllmD9lpK3JA49kPSNKUcVt+yeldraiLIBeEee4EjcA61K/7DYP/ak7YFDDTM7/aSPNgP/3HYnkvy7guZZPiiPmgH0=
+    - secure: HAHhBWLfohw0+0OuS/xYc2fvOfLmz5hbVwdwAoSCfq5Wg1RVajUx7iE/QAtUc3cye6TteqGcpHBEVNhKJAxikWxiAtxczQfqK2XGtFQuDfgg2OpEQ/LznFBvQenuiMbpJf1DNAFEn1wb7A+cGMghetKyMhr2BcIqH89lJE8Tg65Guu1pzzvJJMUiL68KVzQwpjabxbv2dZ8pSVaXfFOO43ZchTlj/0yhPyxhPQlordCFa5XHzND1jud1n4FYh8H9NtyN/ubjUFQlzyX7+45k7I5mIhL5HrbB9eWPs59SIe0ee+sCHl57OIv7yo1CjSib5B9ovqOEX9mu17bby2YkbBFG4lK+XYxvejaipo4VSz0XfP5d+T11rWrC3srQDBLDh98qn4LaxasDEW3hK7b1fOaiQ9i0wQ3hbtS35HaGFPEStseifUF7LvyAUNmmE24VEfh2km3C2GfIu34SrOacXlGeHkfyNEsAgM+lxQ3zmAE3xy+6naNyHNWG0MCEqeHHxmf9liPZLU1sIv0c54Bc1Al/12EyfOQhpkMFrfZY7UaDB9SOaCyGwFMeNhCrXdTdMSEt0WqT/Sf8qnEZG5Y7KeIZsPSPSmQGbYyhKLxYKE+0WU1U+ycFGUvkezjVhkAGBqN9hTpOfugxyOhP/eGZ4/cNBjlFyKkQwm6IKb0nQm8=
 
 before_script:
   - docker build -t factorio .
   - docker run -d --name $TARGET_CONTAINER_ID factorio
-
 script:
   - bundle exec rspec
+after_script:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - docker tag factorio $DOCKER_USER/factorio:$VERSION
+  - docker push factorio
