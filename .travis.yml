@@ -12,11 +12,11 @@ env:
     - secure: HAHhBWLfohw0+0OuS/xYc2fvOfLmz5hbVwdwAoSCfq5Wg1RVajUx7iE/QAtUc3cye6TteqGcpHBEVNhKJAxikWxiAtxczQfqK2XGtFQuDfgg2OpEQ/LznFBvQenuiMbpJf1DNAFEn1wb7A+cGMghetKyMhr2BcIqH89lJE8Tg65Guu1pzzvJJMUiL68KVzQwpjabxbv2dZ8pSVaXfFOO43ZchTlj/0yhPyxhPQlordCFa5XHzND1jud1n4FYh8H9NtyN/ubjUFQlzyX7+45k7I5mIhL5HrbB9eWPs59SIe0ee+sCHl57OIv7yo1CjSib5B9ovqOEX9mu17bby2YkbBFG4lK+XYxvejaipo4VSz0XfP5d+T11rWrC3srQDBLDh98qn4LaxasDEW3hK7b1fOaiQ9i0wQ3hbtS35HaGFPEStseifUF7LvyAUNmmE24VEfh2km3C2GfIu34SrOacXlGeHkfyNEsAgM+lxQ3zmAE3xy+6naNyHNWG0MCEqeHHxmf9liPZLU1sIv0c54Bc1Al/12EyfOQhpkMFrfZY7UaDB9SOaCyGwFMeNhCrXdTdMSEt0WqT/Sf8qnEZG5Y7KeIZsPSPSmQGbYyhKLxYKE+0WU1U+ycFGUvkezjVhkAGBqN9hTpOfugxyOhP/eGZ4/cNBjlFyKkQwm6IKb0nQm8=
 
 before_script:
-  - docker build -t factorio .
-  - docker run -d --name $TARGET_CONTAINER_ID factorio
+  - docker build -t $DOCKER_USER/factorio .
+  - docker run -d --name $TARGET_CONTAINER_ID $DOCKER_USER/factorio
 script:
   - bundle exec rspec
 after_script:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - docker tag factorio $DOCKER_USER/factorio:$VERSION
-  - docker push factorio
+  - docker tag $DOCKER_USER/factorio $DOCKER_USER/factorio:$VERSION
+  - docker push $DOCKER_USER/factorio
