@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
-function auto_start {
+auto_start() {
   if [ -f /factorio/saves/save.zip ]; then
     echo "Using existing save file..."
   else
@@ -13,11 +13,11 @@ function auto_start {
   start_server
 }
 
-function create_map {
+create_map() {
   bin/x64/factorio --create save
 }
 
-function start_server {
+start_server() {
   echo "Starting..."
   bin/x64/factorio --start-server save
 }

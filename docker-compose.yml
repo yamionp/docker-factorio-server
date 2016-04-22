@@ -1,6 +1,6 @@
 factorio:
   # build: .
-  image: munisystem/factorio
+  image: munisystem/test
   ports: 
     - "34197:34197/udp"
   volumes:
