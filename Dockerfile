@@ -8,7 +8,7 @@ RUN apk --update add wget && \
     wget --no-check-certificate -O /tmp/factorio.tar.gz https://www.factorio.com/get-download/`echo $APP_VER`/headless/linux64 && \
     tar zxvf /tmp/factorio.tar.gz && \
     apk del wget && \
-    rm -rf /var/cache/apk/* /tmp
+    rm -rf /var/cache/apk/* /tmp/*
 
 WORKDIR factorio
 COPY ./start.sh /factorio/start.sh
