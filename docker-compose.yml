@@ -1,6 +1,6 @@
 factorio:
   # build: .
-  image: munisystem/factorio:latest
+  image: munisystem/factorio
   ports: 
     - "34197:34197/udp"
   volumes:
