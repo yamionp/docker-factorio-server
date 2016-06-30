@@ -17,7 +17,7 @@ The quickest way to get started:
 docker run -d \
   -v /srv/docker/factorio/save:/factorio/saves \
   -p 34197:34197/udp \
-  munisystem/factorio
+  yamionp/factorio
 ```
 
 Use [docker-compose](https://docs.docker.com/compose/):

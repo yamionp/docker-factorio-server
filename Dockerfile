@@ -1,8 +1,8 @@
 FROM frolvlad/alpine-glibc:alpine-3.3_glibc-2.23
 
-MAINTAINER munisystem
+MAINTAINER yamionp
 
-ENV APP_VER 0.12.30
+ENV APP_VER 0.12.34
 
 RUN apk --update add wget && \
     wget --no-check-certificate -O /tmp/factorio.tar.gz https://www.factorio.com/get-download/`echo $APP_VER`/headless/linux64 && \

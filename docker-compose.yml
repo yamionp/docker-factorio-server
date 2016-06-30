@@ -1,7 +1,7 @@
 factorio:
-  # build: .
-  image: munisystem/factorio
-  ports: 
-    - "34197:34197/udp"
+  build: .
+  # image: yamionp/factorio:0.12.34
+  ports:
+    - "34198:34197/udp"
   volumes:
-    - /srv/docker/saves:/factorio/saves
+    - ~/Documents/factorio/docker/saves:/factorio/saves
