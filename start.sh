@@ -19,7 +19,7 @@ create_map() {
 
 start_server() {
   echo "Starting..."
-  bin/x64/factorio --start-server save
+  bin/x64/factorio --start-server save.zip --port 34197
 }
 
 if [ $# -ne 0 ]; then
